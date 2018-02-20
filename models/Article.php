@@ -20,6 +20,7 @@ use hzhihua\articles\behaviors\I18NBehavior;
  * @property string $title 文章标题
  * @property string $description 文章简述
  * @property string $content 文章内容
+ * @property string $preview_content 编辑器预览内容
  * @property int $is_top 文章是否置顶
  * @property int $created_by 由谁创建
  * @property int $status_id 文章状态ID
@@ -97,7 +98,7 @@ class Article extends ActiveRecord
     {
         return array_merge(parent::rules(), [
             [['title', 'content', 'is_top', 'status', 'public_time', 'created_at', 'updated_at'], 'required'],
-            [['content'], 'string', 'max' => 65535],
+            [['content', 'preview_content'], 'string', 'max' => 65535],
             [['description'], 'string', 'max' => 255],
             [['is_top', 'created_by', 'status', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
@@ -169,6 +170,8 @@ class Article extends ActiveRecord
         $tagArray = explode(',', trim($this->tag, ','));
         $categoryArray = explode(',', trim($this->category, ','));
         $this->description = $this->description ?: mb_substr(HtmlHelper::removeHtmlTags($this->content), 0, 100, 'utf-8');
+        $this->content = HtmlHelper::htmlDecode($this->content);
+        $this->preview_content = HtmlHelper::htmlDecode($this->preview_content);
 
         /**
          * validate $this->tag
@@ -324,6 +327,7 @@ class Article extends ActiveRecord
                 'title',
                 'description',
                 'content',
+                'preview_content',
                 'is_top',
                 'status',
                 'tag',
@@ -335,6 +339,7 @@ class Article extends ActiveRecord
                 'title',
                 'description',
                 'content',
+                'preview_content',
                 'is_top',
                 'status',
                 'tag',

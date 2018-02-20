@@ -1,7 +1,7 @@
 <?php
 /**
  * @Author: cnzhihua
- * @Time: 18-2-18 23:40
+ * @Time: 18-2-20 00:21
  * @Github: https://github.com/Hzhihua
  */
 
@@ -9,7 +9,7 @@ namespace hzhihua\articles;
 
 use Yii;
 
-class MarkdownEditor implements EditorDataHandleInterface
+class Ckeditor implements EditorDataHandleInterface
 {
     /**
      * get data which had been handle for post method
@@ -21,7 +21,7 @@ class MarkdownEditor implements EditorDataHandleInterface
 
         if (empty($data)) {
             $data = Yii::$app->getRequest()->post();
-            $data['Article']['preview_content'] = $data['article-content-html-code'];
+            $data['Article']['preview_content'] = $data['Article']['content'];
         }
 
         return $data;

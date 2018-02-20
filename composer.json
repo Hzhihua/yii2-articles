@@ -18,7 +18,8 @@
         "kartik-v/yii2-date-range": "^1.6@dev",
         "yii2mod/yii2-bootstrap-notify": "*",
         "2amigos/yii2-selectize-widget": "~1.0",
-        "yiier/yii2-editor.md": "*"
+        "yiier/yii2-editor.md": "*",
+        "2amigos/yii2-ckeditor-widget": "~2.1"
     },
     "config": {
         "process-timeout": 1800,

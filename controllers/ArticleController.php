@@ -2,13 +2,13 @@
 
 namespace hzhihua\articles\controllers;
 
-use hzhihua\articles\MarkdownEditor;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use hzhihua\articles\ControllerTrait;
 use hzhihua\articles\helpers\HtmlHelper;
 use hzhihua\articles\helpers\NotifyHelper;
+use hzhihua\articles\EditorDataHandleTrait;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -22,6 +22,8 @@ use hzhihua\articles\helpers\NotifyHelper;
  */
 class ArticleController extends Controller
 {
+    use EditorDataHandleTrait;
+
     /**
      * Lists all Article models.
      * @return mixed
@@ -61,9 +63,7 @@ class ArticleController extends Controller
         if (Yii::$app->getRequest()->isPost) {
             $model->setScenario('insert');
 
-            $data = (new MarkdownEditor(Yii::$app->getRequest()->post()))->getData();
-
-            if ($model->load($data) && $model->save()) {
+            if ($model->load($this->getEditorDataHandle()) && $model->save()) {
                 NotifyHelper::success(Yii::t('articles',
                     'Insert article({title}) successfully',
                     ['title' => HtmlHelper::a($model->title, ['view', 'id' => $model->id])]
@@ -91,7 +91,7 @@ class ArticleController extends Controller
         if (Yii::$app->getRequest()->isPost) {
             $model->setScenario('update');
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load($this->getEditorDataHandle()) && $model->save()) {
                 NotifyHelper::success(Yii::t('articles',
                     'Update article({title}) successfully',
                     ['title' => HtmlHelper::a($model->title, ['view', 'id' => $model->id])]
@@ -136,6 +136,8 @@ class ArticleController extends Controller
     {
         $className = $this->staticModel;
         if (($model = $className::findOne($id)) !== null) {
+            $model->content = HtmlHelper::htmlEncode($model->content);
+            $model->preview_content = HtmlHelper::htmlEncode($model->preview_content);
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('articles', 'The requested page does not exist.'));

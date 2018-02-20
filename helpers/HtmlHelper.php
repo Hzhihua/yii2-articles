@@ -52,7 +52,7 @@ class HtmlHelper extends \yii\helpers\Html
      * @return string
      * @see http://php.net/manual/zh/function.strip-tags.php
      */
-    public static function removeHtmlTags($html, $allowable_tags='<?php ?>')
+    public static function removeHtmlTags($html, $allowable_tags=null)
     {
         return strip_tags($html, $allowable_tags);
     }

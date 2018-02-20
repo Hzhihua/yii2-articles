@@ -2,10 +2,10 @@
 
 namespace hzhihua\articles;
 
-use hzhihua\articles\behaviors\UserBehavior;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use hzhihua\articles\behaviors\UserBehavior;
 use hzhihua\articles\behaviors\I18NBehavior;
 use hzhihua\articles\behaviors\ControllerBehavior;
 
@@ -24,13 +24,6 @@ class Module extends \yii\base\Module
      * @var string
      */
     public $defaultRoute = 'article/index';
-
-    /**
-     * editor class name
-     * You can customize your editor class, but it must be implements [[\hzhihua\articles\EditorInterface]]
-     * @var \hzhihua\articles\EditorInterface
-     */
-//    public $editor = '';
 
     /**
      * @var \yii\db\Connection
@@ -84,6 +77,53 @@ class Module extends \yii\base\Module
      * @var array
      */
     public $controllerBehaviors = [];
+
+    /**
+     * editor view file path
+     *
+     * ** You must both configure $editor and $editorDataHandle **
+     * @see $editorDataHandle
+     *
+     * Usage:
+     * | $editor | $editorDataHandle |
+     * | markdown | 'hzhihua\articles\MarkdownEditor' |
+     * | ckeditor | 'hzhihua\articles\Ckeditor' |
+     * | custom editor | custom editor data handle class |
+     *
+     * You can use 'markdown' or 'ckeditor' or path alias or absolute path within application
+     * - [path alias](guide:concept-aliases) (e.g. "@app/views/site/index");
+     * - absolute path within application (e.g. "//site/index"): the view name starts with double slashes.
+     *
+     * table column name is **content**
+     * ```php
+     * $form->field($model, 'content')
+     * ```
+     *
+     * default markdown https://packagist.org/packages/yiier/yii2-editor.md
+     * default ckeditor https://packagist.org/packages/2amigos/yii2-ckeditor-widget
+     *
+     * @var string
+     * @see \yii\web\View::render()
+     * @see @vendor/hzhihua/yii2-articles/views/article/_markdown_editor.php
+     * @default @vendor/hzhihua/yii2-articles/views/article/_markdown_editor.php
+     */
+    public $editor = 'markdown';
+
+    /**
+     * editor data handle class which must be implements the interface of [[\hzhihua\articles\EditorDataHandleInterface]]
+     *
+     * ** You must both configure $editor and $editorDataHandle **
+     * @see $editor
+     *
+     * Usage:
+     * | $editor | $editorDataHandle |
+     * | markdown | 'hzhihua\articles\MarkdownEditor' |
+     * | ckeditor | 'hzhihua\articles\Ckeditor' |
+     * | custom editor | custom editor data handle class |
+     *
+     * @var string
+     */
+    public $editorDataHandle = 'hzhihua\articles\MarkdownEditor';
 
     /**
      * register asset source
