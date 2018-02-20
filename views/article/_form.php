@@ -108,7 +108,7 @@ switch (Yii::$app->controller->module->editor) {
             'model' => $model,
         ]) ?>
 
-        <?= $form->field($model, 'description', ['options' => ['style' => 'width:100%;float:left']])->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'description', ['options' => ['style' => 'clear:both']])->textarea() ?>
 
         <?= $this->render($editorViewFile, [
             'form' => $form,
