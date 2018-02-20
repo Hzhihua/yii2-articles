@@ -99,8 +99,13 @@ class Module extends \yii\base\Module
      * $form->field($model, 'content')
      * ```
      *
-     * default markdown https://packagist.org/packages/yiier/yii2-editor.md
-     * default ckeditor https://packagist.org/packages/2amigos/yii2-ckeditor-widget
+     * default markdown
+     * @see https://pandao.github.io/editor.md/
+     * @see https://packagist.org/packages/yiier/yii2-editor.md
+     *
+     * default ckeditor
+     * @see https://ckeditor.com/ckeditor-4/
+     * @see https://packagist.org/packages/2amigos/yii2-ckeditor-widget
      *
      * @var string
      * @see \yii\web\View::render()

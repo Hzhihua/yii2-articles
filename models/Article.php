@@ -169,9 +169,9 @@ class Article extends ActiveRecord
         $this->status_id = (int) $this->status;
         $tagArray = explode(',', trim($this->tag, ','));
         $categoryArray = explode(',', trim($this->category, ','));
-        $this->description = $this->description ?: mb_substr(HtmlHelper::removeHtmlTags($this->content), 0, 100, 'utf-8');
-        $this->content = HtmlHelper::htmlDecode($this->content);
-        $this->preview_content = HtmlHelper::htmlDecode($this->preview_content);
+        $this->description = $this->description ?: mb_substr(HtmlHelper::removeHtmlTags($this->content), 0, 250, 'utf-8');
+        $this->content = HtmlHelper::htmlEncode($this->content);
+        $this->preview_content = HtmlHelper::htmlEncode($this->preview_content);
 
         /**
          * validate $this->tag

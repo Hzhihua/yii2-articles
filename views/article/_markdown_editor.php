@@ -9,6 +9,8 @@
 /* @var $model \hzhihua\articles\models\Article */
 /* @var $form \hzhihua\articles\widgets\ActiveForm */
 /* table column name is **content** in {{%article}} table */
+/* @see https://pandao.github.io/editor.md/ */
+/* @see https://packagist.org/packages/yiier/yii2-editor.md */
 
 use yii\web\JsExpression;
 use yiier\editor\EditorMdWidget;
@@ -25,7 +27,7 @@ use hzhihua\articles\helpers\HtmlHelper;
             'width' => '100%',
 //            'previewTheme' => 'dark',
 //            'editorTheme' => 'pastel-on-dark',
-            'markdown' => HtmlHelper::htmlEncode($model->content), // 文本内容
+            'markdown' => HtmlHelper::htmlDecode($model->content), // 文本内容
             'placeholder' => Yii::t('articles', 'You can edit article content in here'), // 文本内容提示
             'codeFold' => true,
             'syncScrolling' => true,

@@ -101,6 +101,8 @@ class ArticleController extends Controller
 
         }
 
+        $model->content = HtmlHelper::htmlDecode($model->content);
+        $model->preview_content = HtmlHelper::htmlDecode($model->preview_content);
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -136,8 +138,6 @@ class ArticleController extends Controller
     {
         $className = $this->staticModel;
         if (($model = $className::findOne($id)) !== null) {
-            $model->content = HtmlHelper::htmlEncode($model->content);
-            $model->preview_content = HtmlHelper::htmlEncode($model->preview_content);
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('articles', 'The requested page does not exist.'));
