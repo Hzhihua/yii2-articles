@@ -126,6 +126,18 @@ class Module extends \yii\base\Module
     public $editorDataHandle = 'hzhihua\articles\MarkdownEditor';
 
     /**
+     * date range picker view file for /article/create|/article/update public_time field
+     *
+     * table column name is **public_time**
+     * ```php
+     * $form->field($model, 'public_time')
+     *
+     * @var string
+     * @see @vendor/hzhihua/yii2-articles/views/article/_date_range_picker.php
+     */
+    public $dateRangePickerViewFile = '@vendor/hzhihua/yii2-articles/views/article/_date_range_picker.php';
+
+    /**
      * register asset source
      * @var string
      */

@@ -7,7 +7,6 @@ use hzhihua\articles\widgets\ActiveForm;
 use hzhihua\articles\models\ArticleTag;
 use hzhihua\articles\models\ArticleStatus;
 use hzhihua\articles\models\ArticleCategory;
-use trntv\yii\datetime\DateTimeWidget;
 use dosamigos\selectize\SelectizeDropDownList;
 
 /* @var $this \yii\web\View */
@@ -104,28 +103,17 @@ switch (Yii::$app->controller->module->editor) {
         ]) ?>
         <?= $form->field($model, 'category', ['options' => ['style' => 'width:33%;height:94px;margin:0 .5% 0 .5%;float:left']])->textInput() ?>
 
-        <?php $public_time = $model->public_time; $model->public_time = null ?>
-        <?= $form->field($model, 'public_time', ['options' => ['style' => 'width:33%;height:94px;float:left']])->widget(DateTimeWidget::className(),[
-            // 2018-02-09 11:29:48, 周五
-            'momentDatetimeFormat' => 'YYYY-MM-DD HH:mm:ss',
-            'clientOptions' => [
-                'defaultDate' => date('Y-m-d H:i:s', $public_time ?: time()), // set default value
-                'allowInputToggle' => true,
-                'sideBySide' => true,
-                'locale' => Yii::$app->language,
-                'widgetPositioning' => [
-                    'horizontal' => 'auto',
-                    'vertical' => 'auto'
-                ]
-            ]
-        ]);?>
+        <?= $this->render(Yii::$app->controller->module->dateRangePickerViewFile, [
+            'form' => $form,
+            'model' => $model,
+        ]) ?>
 
         <?= $form->field($model, 'description', ['options' => ['style' => 'width:100%;float:left']])->textInput(['maxlength' => true]) ?>
 
         <?= $this->render($editorViewFile, [
             'form' => $form,
             'model' => $model,
-        ]);?>
+        ]) ?>
 
     </div>
     <div class="box-footer">
