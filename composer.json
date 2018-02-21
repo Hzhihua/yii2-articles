@@ -1,0 +1,41 @@
+{
+    "name": "hzhihua/yii2-articles",
+    "description": "yii2-articles module yii2 articles",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "cnzhihua",
+            "email": "cnzhihua@gmail.com",
+            "github": "https://github.com/Hzhihua/yii2-articles"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "~2.0.6",
+        "hzhihua/yii2-dump": "*",
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "kartik-v/yii2-date-range": "^1.6@dev",
+        "yii2mod/yii2-bootstrap-notify": "*",
+        "2amigos/yii2-selectize-widget": "~1.0",
+        "yiier/yii2-editor.md": "*",
+        "2amigos/yii2-ckeditor-widget": "~2.1",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-editable": "@dev"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "github-protocols": ["https", "http"]
+    },
+    "autoload": {
+        "psr-4": {
+            "hzhihua\\articles\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
