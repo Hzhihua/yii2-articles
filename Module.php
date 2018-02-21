@@ -143,10 +143,30 @@ class Module extends \yii\base\Module
     public $dateRangePickerViewFile = '@vendor/hzhihua/yii2-articles/views/article/_date_range_picker.php';
 
     /**
+     * select view file for /article/create|/article/update tag|category field
+     *
+     * table column name is **tag|category**
+     * ```php
+     * $form->field($model, 'tag|category')
+     *
+     * @var string
+     * @see @vendor/hzhihua/yii2-articles/views/article/_selectize.php
+     */
+    public $selectizeViewFile = '@vendor/hzhihua/yii2-articles/views/article/_selectize.php';
+
+    /**
      * register asset source
      * @var string
      */
     public $asset = 'dmstr\web\AdminLteAsset';
+
+    public function init()
+    {
+        parent::init();
+        Yii::$app->setModule('gridview', [
+            'class' => '\kartik\grid\Module'
+        ]);
+    }
 
     /**
      * {@inheritdoc}

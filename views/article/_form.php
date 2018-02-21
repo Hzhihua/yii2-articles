@@ -7,7 +7,6 @@ use hzhihua\articles\widgets\ActiveForm;
 use hzhihua\articles\models\ArticleTag;
 use hzhihua\articles\models\ArticleStatus;
 use hzhihua\articles\models\ArticleCategory;
-use dosamigos\selectize\SelectizeDropDownList;
 
 /* @var $this \yii\web\View */
 /* @var $model \hzhihua\articles\models\Article */
@@ -58,50 +57,17 @@ switch (Yii::$app->controller->module->editor) {
             ],
         ]) ?>
 
-        <?= $form->field($model, 'tag', ['options' => ['style' => 'width:33%;height:94px;float:left']])->widget(SelectizeDropDownList::className(), [
-//            'name' => 'tag',
-//            'items' => [
-//                'Brian Reavis',
-//                'Nikola Tesla',
-//                'someone@gmail.com',
-//            ],
-            'clientOptions' => [
-                'plugins' => [
-                    'remove_button',
-                ],
-                'delimiter' => ',',
-                'persist' => false,
-                'create' => new \yii\web\JsExpression('function(input) {
-        return {
-            value: input,
-            text: input
-        }
-    }'),
-//                'maxItems' => null,
-//                'valueField' => 'email',
-//                'labelField' => 'name',
-//                'searchField' => [
-//                    'name',
-//                    'email',
-//                ],
-//                'options' => [
-//                    [
-//                        'email' => 'brian@thirdroute.com',
-//                        'name' => 'Brian Reavis',
-//                    ],
-//                    [
-//                        'email' => 'nikola@tesla.com',
-//                        'name' => 'Nikola Tesla',
-//                    ],
-//                    [
-//                        'email' => 'someone@gmail.com',
-//                        'name' => '<h1>somehere</h1>',
-//                    ],
-//                ],
+        <?= $this->render(Yii::$app->controller->module->selectizeViewFile, [
+            'form' => $form,
+            'model' => $model,
+            'attribute' => 'tag',
+        ])?>
 
-            ],
-        ]) ?>
-        <?= $form->field($model, 'category', ['options' => ['style' => 'width:33%;height:94px;margin:0 .5% 0 .5%;float:left']])->textInput() ?>
+        <?= $this->render(Yii::$app->controller->module->selectizeViewFile, [
+            'form' => $form,
+            'model' => $model,
+            'attribute' => 'category',
+        ])?>
 
         <?= $this->render(Yii::$app->controller->module->dateRangePickerViewFile, [
             'form' => $form,

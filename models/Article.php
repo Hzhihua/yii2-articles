@@ -167,8 +167,6 @@ class Article extends ActiveRecord
         }
 
         $this->status_id = (int) $this->status;
-        $tagArray = explode(',', trim($this->tag, ','));
-        $categoryArray = explode(',', trim($this->category, ','));
         $this->description = $this->description ?: mb_substr(HtmlHelper::removeHtmlTags($this->content), 0, 250, 'utf-8');
         $this->content = HtmlHelper::htmlEncode($this->content);
         $this->preview_content = HtmlHelper::htmlEncode($this->preview_content);
@@ -176,7 +174,7 @@ class Article extends ActiveRecord
         /**
          * validate $this->tag
          */
-        if ($this->isEmptyArray($tagArray)) {
+        if ($this->isEmptyArray($this->tag)) {
             $this->addError('tag', Yii::t('articles', 'Tag format error'));
             Yii::warning(sprintf('article tag(%s) format error', $this->tag), __METHOD__);
             return false;
@@ -185,7 +183,7 @@ class Article extends ActiveRecord
         /**
          * validate $this->category
          */
-        if ($this->isEmptyArray($categoryArray)) {
+        if ($this->isEmptyArray($this->category)) {
             $this->addError('category', Yii::t('articles', 'Category format error'));
             Yii::warning(sprintf('article category(%s) format error', $this->category), __METHOD__);
             return false;
@@ -206,7 +204,7 @@ class Article extends ActiveRecord
          * check whether article tag is exists
          */
         if (count($this->tag) !== (int)
-            ($this->articleTagClass)::findByCondition(['id' => $tagArray, 'created_by' => $this->userId])->count('`id`')
+            ($this->articleTagClass)::findByCondition(['id' => $this->tag, 'created_by' => $this->userId])->count('`id`')
         ) {
             $this->addError('tag', Yii::t('articles', 'Some tags are not exists'));
             Yii::warning(sprintf(
@@ -221,7 +219,7 @@ class Article extends ActiveRecord
          * check whether article category is exists
          */
         if (count($this->category) !== (int)
-            ($this->articleCategoryClass)::findByCondition(['id' => $categoryArray, 'created_by' => $this->userId])->count('`id`')
+            ($this->articleCategoryClass)::findByCondition(['id' => $this->category, 'created_by' => $this->userId])->count('`id`')
         ) {
             $this->addError('category', Yii::t('articles', 'Some categories are not exists'));
             Yii::warning(sprintf(
