@@ -49,6 +49,10 @@ return [
     'Search' => '搜索',
     'Reset' => '重置',
 
+    'Reset Grid' => '刷新',
+    'Create Article' => '创建新文章',
+    'Search article status' => '搜索文章状态',
+
     'You can edit article content in here' => '在这里编辑文章内容',
 
     # error
