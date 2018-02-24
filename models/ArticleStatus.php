@@ -34,7 +34,7 @@ class ArticleStatus extends ActiveRecord
      */
     public static function tableName()
     {
-        return (Yii::$app->controller->module->tableName)['article_status'];
+        return '{{%article_status}}';
     }
 
     /**

@@ -2,14 +2,15 @@
 
 namespace hzhihua\articles\models;
 
-use hzhihua\articles\helpers\HtmlHelper;
 use Yii;
 use yii\base\Exception;
 use yii\base\Model;
 use yii\base\ModelEvent;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
+use hzhihua\articles\helpers\HtmlHelper;
 use hzhihua\articles\helpers\ArrayHelper;
+use hzhihua\articles\behaviors\DbBehavior;
 use hzhihua\articles\behaviors\UserBehavior;
 use hzhihua\articles\behaviors\I18NBehavior;
 
@@ -28,6 +29,7 @@ use hzhihua\articles\behaviors\I18NBehavior;
  * @property int $created_at 创建时间
  * @property int $updated_at 最近修改时间
  * @property \hzhihua\articles\behaviors\UserBehavior $userId user who had logined identity
+ * @property \yii\db\Connection $db \hzhihua\articles\behaviors\DbBehavior
  * @method boolean checkUserPermission \hzhihua\articles\behaviors\UserBehavior
  */
 class Article extends ActiveRecord
@@ -79,16 +81,11 @@ class Article extends ActiveRecord
     private $_statusData = [];
 
     /**
-     * @var \yii\db\Connection
-     */
-    private $db;
-
-    /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return (Yii::$app->controller->module->tableName)['article'];
+        return '{{%article}}';
     }
 
     /**
@@ -106,20 +103,13 @@ class Article extends ActiveRecord
         ]);
     }
 
-    public function init()
-    {
-        parent::init();
-
-        $dbName = Yii::$app->controller->module->db;
-        $this->db = Yii::$app->$dbName;
-    }
-
     /**
      * @return array
      */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
+            DbBehavior::className(),
             I18NBehavior::className(),
             UserBehavior::className(),
             TimestampBehavior::className(),
@@ -168,8 +158,8 @@ class Article extends ActiveRecord
 
         $this->status_id = (int) $this->status;
         $this->description = $this->description ?: mb_substr(HtmlHelper::removeHtmlTags($this->content), 0, 250, 'utf-8');
-        $this->content = HtmlHelper::htmlEncode($this->content);
-        $this->preview_content = HtmlHelper::htmlEncode($this->preview_content);
+        $this->content = HtmlHelper::encode($this->content);
+        $this->preview_content = HtmlHelper::encode($this->preview_content);
 
         /**
          * validate $this->tag
@@ -415,6 +405,21 @@ class Article extends ActiveRecord
     public function getArticleAndTag()
     {
         return $this->hasMany(ArticleAndTag::className(), ['article_id' => 'id'])->joinWith('articleTag');
+    }
+
+    /**
+     * get prev/next article in $where condition
+     * @param $where
+     * @return array
+     */
+    public static function getNavArticle($where)
+    {
+        return static::find()
+            ->select('`id`, `title`')
+            ->where($where)
+            ->limit(1)
+            ->asArray()
+            ->one();
     }
 
 }

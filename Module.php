@@ -31,19 +31,6 @@ class Module extends \yii\base\Module
     public $db = 'db';
 
     /**
-     * model table name
-     * @var array
-     */
-    public $tableName = [
-        'article' => '{{%article}}',
-        'article_status' => '{{%article_status}}',
-        'article_tag' => '{{%article_tag}}',
-        'article_category' => '{{%article_category}}',
-        'article_and_tag' => '{{%article_and_tag}}',
-        'article_and_category' => '{{%article_and_category}}',
-    ];
-
-    /**
      * php date format for display in actionIndex/actionView
      * @var string
      */
@@ -158,15 +145,7 @@ class Module extends \yii\base\Module
      * register asset source
      * @var string
      */
-    public $asset = 'dmstr\web\AdminLteAsset';
-
-    public function init()
-    {
-        parent::init();
-        Yii::$app->setModule('gridview', [
-            'class' => '\kartik\grid\Module'
-        ]);
-    }
+    public $asset = '';
 
     /**
      * {@inheritdoc}
@@ -174,7 +153,7 @@ class Module extends \yii\base\Module
     public function beforeAction($action)
     {
         // register asset source
-        ($this->asset)::register(Yii::$app->controller->getView());
+        $this->asset && ($this->asset)::register(Yii::$app->controller->getView());
 
         // attach behaviors for current controller
         $this->attachControllerBehaviors();

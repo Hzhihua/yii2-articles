@@ -101,8 +101,8 @@ class ArticleController extends Controller
 
         }
 
-        $model->content = HtmlHelper::htmlDecode($model->content);
-        $model->preview_content = HtmlHelper::htmlDecode($model->preview_content);
+        $model->content = HtmlHelper::decode($model->content);
+        $model->preview_content = HtmlHelper::decode($model->preview_content);
         return $this->render('update', [
             'model' => $model,
         ]);

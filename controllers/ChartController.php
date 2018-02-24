@@ -10,7 +10,10 @@ namespace hzhihua\articles\controllers;
 
 use yii\web\Controller;
 
-class ChatController extends Controller
+class ChartController extends Controller
 {
-
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
 }

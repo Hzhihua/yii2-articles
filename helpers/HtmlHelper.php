@@ -26,28 +26,6 @@ class HtmlHelper extends \yii\helpers\Html
     }
 
     /**
-     * Convert special HTML entities back to characters
-     * @param string $html
-     * @return string
-     * @see http://php.net/manual/zh/function.htmlspecialchars-decode.php
-     */
-    public static function htmlDecode($html)
-    {
-        return htmlspecialchars_decode($html);
-    }
-
-    /**
-     * Convert special characters to HTML entities
-     * @param string $html
-     * @return string
-     * @see http://php.net/manual/zh/function.htmlspecialchars.php
-     */
-    public static function htmlEncode($html)
-    {
-        return htmlspecialchars($html);
-    }
-
-    /**
      * @param string $html
      * @return string
      * @see http://php.net/manual/zh/function.strip-tags.php

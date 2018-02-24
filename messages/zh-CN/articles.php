@@ -12,7 +12,7 @@ return [
     'Name' => '名称',
     'Description' => '简要描述',
     'Content' => '内容',
-    'Is Top' => '置顶文章',
+    'Is Top' => '置顶',
     'Status' => '状态',
     'Status Id' => '状态',
     'Public Time' => '发布时间',

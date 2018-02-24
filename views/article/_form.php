@@ -51,7 +51,7 @@ switch (Yii::$app->controller->module->editor) {
 
         <?= $form->field($model, 'status', ['options' => ['style' => 'width:33%;height:94px;float:left']])->dropDownList(ArrayHelper::map(ArticleStatus::selectAll(), 'id', 'name'), [
             'options' => [
-                $defaultStatusId => [
+                ($model->status_id ?: $defaultStatusId) => [
                     'Selected' => 'selected',
                 ],
             ],

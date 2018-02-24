@@ -27,7 +27,7 @@ class ArticleCategory extends ActiveRecord
      */
     public static function tableName()
     {
-        return (Yii::$app->controller->module->tableName)['article_category'];
+        return '{{%article_category}}';
     }
 
     /**

@@ -23,7 +23,7 @@ class ArticleAndTag extends ActiveRecord
      */
     public static function tableName()
     {
-        return (Yii::$app->controller->module->tableName)['article_and_tag'];
+        return '{{%article_and_tag}}';
     }
 
     /**

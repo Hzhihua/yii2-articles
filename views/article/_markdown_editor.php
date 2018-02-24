@@ -27,7 +27,7 @@ use hzhihua\articles\helpers\HtmlHelper;
             'width' => '100%',
 //            'previewTheme' => 'dark',
 //            'editorTheme' => 'pastel-on-dark',
-            'markdown' => HtmlHelper::htmlDecode($model->content), // 文本内容
+            'markdown' => HtmlHelper::decode($model->content), // 文本内容
             'placeholder' => Yii::t('articles', 'You can edit article content in here'), // 文本内容提示
             'codeFold' => true,
             'syncScrolling' => true,
