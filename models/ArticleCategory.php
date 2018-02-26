@@ -93,9 +93,9 @@ class ArticleCategory extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArticle()
+    public function getArticleAndCategory()
     {
-        return $this->hasMany(ArticleAndCategory::className(), ['category_id' => 'id'])->joinWith('article');
+        return $this->hasMany(ArticleAndCategory::className(), ['category_id' => 'id'])->With('article');
     }
 
     /**

@@ -164,7 +164,7 @@ class Article extends ActiveRecord
         /**
          * validate $this->tag
          */
-        if ($this->isEmptyArray($this->tag)) {
+        if (!empty($this->tag) && $this->isEmptyArray($this->tag)) {
             $this->addError('tag', Yii::t('articles', 'Tag format error'));
             Yii::warning(sprintf('article tag(%s) format error', $this->tag), __METHOD__);
             return false;
@@ -388,7 +388,7 @@ class Article extends ActiveRecord
      */
     public function getArticleAndCategory()
     {
-        return $this->hasMany(ArticleAndCategory::className(), ['article_id' => 'id'])->joinWith('articleCategory');
+        return $this->hasMany(ArticleAndCategory::className(), ['article_id' => 'id'])->with('articleCategory');
     }
 
     /**
@@ -404,7 +404,7 @@ class Article extends ActiveRecord
      */
     public function getArticleAndTag()
     {
-        return $this->hasMany(ArticleAndTag::className(), ['article_id' => 'id'])->joinWith('articleTag');
+        return $this->hasMany(ArticleAndTag::className(), ['article_id' => 'id'])->with('articleTag');
     }
 
     /**

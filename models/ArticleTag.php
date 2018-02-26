@@ -104,4 +104,12 @@ class ArticleTag extends ActiveRecord
 
         return static::find()->where(['created_by' => $userId])->asArray()->all();
     }
+
+    /**
+     * @return $this
+     */
+    public function getArticleAndTag()
+    {
+        return $this->hasMany(ArticleAndTag::className(), ['tag_id' => 'id'])->with('article');
+    }
 }

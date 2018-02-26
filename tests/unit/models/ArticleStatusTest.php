@@ -13,8 +13,8 @@ class ArticleStatusTest extends Unit
 
     public function testGetDefaultStatus()
     {
-        $data = ArticleStatus::getDefaultStatus();
-        codecept_debug($data);
+//        $data = ArticleStatus::getDefaultStatus();
+//        codecept_debug($data);
 //        $query = ArticleStatus::find()->where(['is_default_status' => 1]);
 //        codecept_debug($query->createCommand()->getRawSql());
 //        codecept_debug($query->asArray()->all());
