@@ -19,9 +19,8 @@
         "yiier/yii2-editor.md": "*",
         "2amigos/yii2-selectize-widget": "~1.0",
         "2amigos/yii2-ckeditor-widget": "~2.1",
-        "kartik-v/yii2-date-range": "^1.6@dev",
+        "trntv/yii2-datetime-widget": "*",
         "kartik-v/yii2-grid": "@dev",
-        "kartik-v/yii2-editable": "@dev",
         "kartik-v/yii2-export": "^1.2@dev"
     },
     "config": {
