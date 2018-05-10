@@ -2,6 +2,7 @@
 
 namespace hzhihua\articles\controllers;
 
+use common\models\File;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,6 +24,27 @@ use hzhihua\articles\EditorDataHandleTrait;
 class ArticleController extends Controller
 {
     use EditorDataHandleTrait;
+
+    public function beforeAction($action)
+    {
+        if ($action->id === 'file-upload') {
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
+
+    /**     * @return array
+     */
+    public function actions()
+    {
+        return array_merge(parent::actions(), [
+            'file-upload' => [
+                'class' => 'hzhihua\actions\FileUploadAction',
+                'attribute' => 'upload',
+                'on afterUpload' => [new File(), 'afterFileUpload'],
+            ],
+        ]);
+    }
 
     /**
      * Lists all Article models.

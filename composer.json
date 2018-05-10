@@ -21,7 +21,7 @@
         "2amigos/yii2-ckeditor-widget": "~2.1",
         "trntv/yii2-datetime-widget": "*",
         "kartik-v/yii2-grid": "@dev",
-        "kartik-v/yii2-export": "^1.2@dev"
+        "hzhihua/yii2-bootstrap-fileinput": "dev-master"
     },
     "config": {
         "process-timeout": 1800,

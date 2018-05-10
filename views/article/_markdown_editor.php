@@ -50,7 +50,7 @@ use hzhihua\articles\helpers\HtmlHelper;
             'dialogMaskBgColor' => '#000', // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
             'imageUpload' => true,
             'imageFormats' => ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'],
-            'imageUploadURL' => '/file/blog-upload?type=default&filekey=editormd-image-file',
+            'imageUploadURL' => \yii\helpers\Url::to(['file-upload']),
             'onfullscreen' => new JsExpression('function () {this.editor.css("border-radius", 0).css("z-index", 9999);}'),
             'onfullscreenExit' => new JsExpression('function() {this.editor.css({zIndex: 10,border: "none","border-radius": "5px"});this.resize();}'),
         ]

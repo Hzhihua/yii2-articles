@@ -36,6 +36,8 @@ class Module extends \yii\base\Module
      */
     public $dateFormat = 'Y-m-d H:i:s';
 
+    public $editorViewFile;
+
     /**
      * attach behaviors to current controller
      *
