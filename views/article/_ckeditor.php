@@ -7,6 +7,7 @@
 
 use dosamigos\ckeditor\CKEditor;
 use dosamigos\ckeditor\CKEditorInline;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $model \hzhihua\articles\models\Article */
@@ -23,7 +24,7 @@ use dosamigos\ckeditor\CKEditorInline;
     'preset' => 'custom', /* @see \dosamigos\ckeditor\CKEditorTrait */
     'clientOptions' => [
 //        'extraPlugins' => 'uploadimage',
-        'filebrowserUploadUrl' => 'http://localhost/gp/backend/web/index.php?r=article/article/file-upload',
-        'filebrowserBrowseUrl' => 'http://localhost/gp/source/',
+        'filebrowserUploadUrl' => Url::to(['file-upload']),
+        'filebrowserBrowseUrl' => rtrim(Yii::$app->params['baseUrl'], '/') . '/',
     ],
 ]) ?>
