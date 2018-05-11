@@ -5,9 +5,10 @@
  * @Github: https://github.com/Hzhihua
  */
 
+use yii\helpers\Url;
+use yii\helpers\Html;
 use dosamigos\ckeditor\CKEditor;
 use dosamigos\ckeditor\CKEditorInline;
-use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $model \hzhihua\articles\models\Article */
@@ -18,7 +19,7 @@ use yii\helpers\Url;
 //$this->registerJs("CKEDITOR.plugins.addExternal('image2', '/gp/backend/web/ckeditor_plugins/image2/plugin.js', '');");
 ?>
 
-<? $model->content = $model->preview_content ?>
+<?php $model->content = Html::decode($model->preview_content) ?>
 <?= $form->field($model, 'content')->widget(CKEditor::className(), [
 //    'options' => ['rows' => 6],
     'preset' => 'custom', /* @see \dosamigos\ckeditor\CKEditorTrait */
